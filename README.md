@@ -3,16 +3,14 @@ This repository provides the framework used to optimize and discover n+1 element
 
 In addition to the ML framework, this work provides the first ever investigation into the bidentate adsorption of COCOH, a key intermediate in the CO2RR pathway towards its most valuable products (C2+). As seen below, literature exclusively focused on the monodentate pathway but this work shows the energetics of bidentate dual CO co-adsorption followed by hydrogenation can provide a more energetically favorable pathway.
 
-![bidentate](images/bidentate.png)
-
+<img src="images/bidentate.png" width="300">
 
 The main notebook titled 'Catalyst_Discovery_Framework' performs configurational space exploration, predicts optimal catalyst structures and automatically generates VASP readable geometry files based on the ML guided optimization.
 
 The exact pipeline used to discover catalyst is visualized below. The notebook elaborates on the design decisions, science and discovery featured in the publication.
 
-![pipeline](images/pipeline.png)
+<img src="images/pipeline.png" width="300">
 
-<img src="images/pipeline.png" width="100">
 In this repo are the following files:
 
 Catalyst_Discovery_Framework.ipynb: a notebook walking through the framework used to discover 3 element alloy catalysts from 2 element binary alloy catalysts (BAC). Models framework based on TensorFlow 2.0 MLP NN.
