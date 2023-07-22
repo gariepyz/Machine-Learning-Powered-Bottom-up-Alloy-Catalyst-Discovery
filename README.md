@@ -10,7 +10,7 @@ The main notebook titled 'Catalyst_Discovery_Framework' performs configurational
 The exact pipeline used to discover catalyst is visualized below. The notebook elaborates on the design decisions, science and discovery featured in the publication.
 
 <p align="center" width="75%">
-    <img width="33%" src="images/pipeline.png"> 
+    <img width="50%" src="images/pipeline.png"> 
 </p>
 
 In this repo are the following files:
