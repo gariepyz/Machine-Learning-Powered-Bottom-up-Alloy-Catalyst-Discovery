@@ -13,3 +13,5 @@ saved_NN_parameters folder: saved weight/bias so you dont have to train a model 
 saved_dataset.npy: train/test split for saved model
 
 Cu_pure: sample structure for automated catalyst surface generation
+
+![bidentate](images/bidentate.png)
