@@ -12,6 +12,7 @@ The exact pipeline used to discover catalyst is visualized below. The notebook e
 
 ![pipeline](images/pipeline.png)
 
+<img src="images/pipeline.png" width="100">
 In this repo are the following files:
 
 Catalyst_Discovery_Framework.ipynb: a notebook walking through the framework used to discover 3 element alloy catalysts from 2 element binary alloy catalysts (BAC). Models framework based on TensorFlow 2.0 MLP NN.
