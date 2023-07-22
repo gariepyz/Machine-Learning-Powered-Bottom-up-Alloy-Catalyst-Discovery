@@ -9,7 +9,7 @@ In addition to the ML framework, this work provides the first ever investigation
 
 The main notebook titled 'Catalyst_Discovery_Framework' performs configurational space exploration, predicts optimal catalyst structures and automatically generates VASP readable geometry files based on the ML guided optimization.
 
-The exact pipeline used to discover catalyst is visualized below. The notebook elaborates on the design decisions, science and discovery featured in the publication.
+The exact pipeline used to discover catalysts is visualized below. The notebook elaborates on the design decisions, science and discovery featured in the publication.
 
 <p align="center" width="75%">
     <img width="50%" src="images/pipeline.png"> 
