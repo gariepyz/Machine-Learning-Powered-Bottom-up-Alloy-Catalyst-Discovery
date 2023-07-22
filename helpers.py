@@ -163,7 +163,7 @@ class Strucutre_Generator():
         print(f'2n Structure Gen. Runtime (s): {t2-t1}')
 
         plt.hist(predictions,bins=25)
-        plt.title(f'Structure predictions with {pred_ele} binary alloy')
+        plt.title(f'{count} structure predictions with {pred_ele} binary alloy')
         plt.xlabel('Eads (eV)')
         plt.ylabel('Frequency')
         
