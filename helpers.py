@@ -1,4 +1,4 @@
-#package imports
+#Package imports
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -20,11 +20,13 @@ from ase import Atoms
 from ase.io import read, write
 from ase.visualize import view
 
+#This clas handle model/data imports
 class Model_importer:
-    def __init__(self,data_path,model_save_path):#descriptor_dict,position_count,dataframe):
-        self.data_path = data_path #str: stored data path/filename
-        self.model_save_path = model_save_path #str: stored model path
-
+    def __init__(self,data_path,model_save_path):
+        self.data_path = data_path #(str): stored data path/filename
+        self.model_save_path = model_save_path #(str): stored model path
+    
+    #Import MLP NN model without bias 
     def Import_model(self):
         model = Sequential([
                             Dense(64,input_shape=(52,),activation='relu', use_bias=False),
@@ -35,7 +37,8 @@ class Model_importer:
         model.compile(optimizer=opt, loss='mse', metrics=['mae','mse'])
         model.load_weights(self.model_save_path)
         return model
-    
+
+    #Import Train/val/test split of pre-processed data
     def Import_data(self):
         with open(self.data_path, 'rb') as f:
             X_train = np.load(f)
@@ -46,7 +49,12 @@ class Model_importer:
             Y_test = np.load(f)
         return X_train,X_val,X_test,Y_train,Y_val,Y_test
     
-    def Model_performance(self,model,X_train,X_test,Y_train,Y_test ,save_img=False):
+    #Print model MAE, parity plot and option to save img PNG
+    def Model_performance(self,model,X_train,X_test,Y_train,Y_test ,save_img=False): 
+        #X/Y (array)
+        #save_img (bool)
+        
+        #Predicted Values
         yhat_train =list( model.predict(X_train)[:,0] )
         yhat_test  =list( model.predict(X_test)[:,0]  ) 
         preds=yhat_test+yhat_train
@@ -61,7 +69,7 @@ class Model_importer:
             labels.append('test')
         for i in range(len(yhat_train)):
             labels.append('train')
-
+        #df of all datapoints
         d = {'Predicted': preds, 'Real': real,'Label':labels}
         df_scatter = pd.DataFrame(data=d)
 
@@ -97,15 +105,17 @@ class Model_importer:
         plt.tight_layout()
         if save_img:
             plt.savefig('NN_Parity_Plot')
-        #--------------------------------
         return mean_absolute_error(y_test, yhat_test)
     
+#This class handle optimization, exploration and generation of geometry files    
 class Strucutre_Generator():
     def __init__(self,dictionnary,model):#descriptor_dict,position_count,dataframe):
         self.dictionnary = dictionnary
         self.model = model
-
+    #Called within Random_datapoint function. Perform feature embedding from a list of str values of 
+    #local configuration into a tensor
     def Convert_line(self, line):
+        #line (df series)
         label_holders=[]
         for i in range(52):
             label_holders.append(str(i))
@@ -116,8 +126,9 @@ class Strucutre_Generator():
         df_2D = pd.DataFrame(data=np.reshape(np.array(readable_input),(1,52)),columns=label_holders)
         return df_2D
         
-        
-    def Random_datapoint(self, ele): #generate random datapoint in ML predictable format
+    #Called within Generate_structures_2n. Generate random datapoint, convert to tensor    
+    def Random_datapoint(self, ele):
+        #ele (str)
         template = ['Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu']
         replacements=[]
         for k in range(13):
@@ -129,8 +140,13 @@ class Strucutre_Generator():
         converted=self.Convert_line(template)
 
         return template,converted
-        
+    
+    #Generate fixed amount of random structures and save the structures/predictions within a list   
     def Generate_structures_2n(self,pred_ele,count=100,save=False):
+        #pred_ele (str)
+        #count (float)
+        #save (bool)
+        
         t1=time.time()        
         predictions_str = []
         predictions=[]
@@ -166,15 +182,21 @@ class Strucutre_Generator():
         
         return predictions_str,predictions,struct_pred
     
+    #Get stats
     def Get_generation_stats(self,preds):
+        #preds (list)
         Mean = np.mean(preds)
         print(f'Mean: {str(Mean)[:5]}')
         Range = np.max(preds) - np.min(preds)
         print (f'Range: {str(Range)[:5]}')
         best_ads = np.max(preds)
         print ('Best Ads: '+str(best_ads)[:5])
+    #Extract best structure    
+    def Get_optimal_structure(self,preds,structs,elements):
+        #preds (list)
+        #structs (list)
+        #elements (list of str)
         
-    def Get_optimal_structure(self,preds,structs,elements):        
         for i in range(len(preds)):
             if preds[i] == np.min(preds):
                 idx=i
@@ -185,8 +207,14 @@ class Strucutre_Generator():
                 replacement_idx.append(i+1)
                 
         return structs[idx],replacement_idx
-    
+    #convert tensor into a geometry file for DFT calcs
     def New_design_2n(self,replacements,element,slab=None,save=False,formatting='espresso-in'):
+        #replacements (list)
+        #element (str)
+        #slab (ASE atoms object)
+        #save (bool)
+        #formatting (str of ASE formats)
+        
         if slab is None:
             sample_atom = read('Cu_Pure',format='vasp')
         if slab is not None:
@@ -335,8 +363,13 @@ class Strucutre_Generator():
         
         converted=self.Convert_line(np.array(template))
         return template,converted
-    
+
+    #Generate fixed amount of random structures and save the structures/predictions within a list       
     def Generate_structures_3n(self,e1,e2,count=100,save=False):
+        #e1/e2 (str)
+        #count (float)
+        #save (bool)
+        
         t1=time.time()
 
         predictions_str=[]
@@ -373,8 +406,11 @@ class Strucutre_Generator():
         self.predictions_structures_3n = struct_pred
         self.alloyed_element_3n = e1+e2
         return predictions_str,predictions,struct_pred        
-
-    def Symbol_to_index(self,ele,structure): #ele=str, structure= list
+    # convert list of str of elements into replace idx for new_design function 
+    def Symbol_to_index(self,ele,structure): 
+        #ele (str)
+        #structure (list)
+        
         idx=[]
         for i in range(len(structure)):
             if structure[i] == ele:
@@ -382,8 +418,15 @@ class Strucutre_Generator():
             else:
                 p=0
         return idx        
-         
+
+    #convert tensor into a geometry file for DFT calcs         
     def New_design_3n(self,e1,e2,structure,save=False,formatting='espresso-in'):
+        #replacements (list)
+        #element (str)
+        #slab (ASE atoms object)
+        #save (bool)
+        #formatting (str of ASE formats)
+        
         rep1 = self.Symbol_to_index(e1,structure)
         rep2 = self.Symbol_to_index(e2,structure)
         
