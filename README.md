@@ -26,4 +26,4 @@ saved_dataset.npy: train/test split for saved model
 
 Cu_pure: sample structure for automated catalyst surface generation
 
-All code, functions, class are thoroughly commented but if you have any questions, please feel free to reach out to me!
+All code is thoroughly commented but if you have any questions, please feel free to reach out to me!
