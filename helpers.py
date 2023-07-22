@@ -21,7 +21,7 @@ from ase.io import read, write
 from ase.visualize import view
 
 #This clas handle model/data imports
-class Model_importer:
+class Model_importer():
     def __init__(self,data_path,model_save_path):
         self.data_path = data_path #(str): stored data path/filename
         self.model_save_path = model_save_path #(str): stored model path
