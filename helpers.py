@@ -20,13 +20,12 @@ from ase import Atoms
 from ase.io import read, write
 from ase.visualize import view
 
-#This clas handle model/data imports
+#This class handle model/data imports
 class Model_importer():
     def __init__(self,data_path,model_save_path):
         self.data_path = data_path #(str): stored data path/filename
         self.model_save_path = model_save_path #(str): stored model path
     
-    #Import MLP NN model without bias 
     def Import_model(self):
         model = Sequential([
                             Dense(64,input_shape=(52,),activation='relu', use_bias=False),
@@ -51,8 +50,10 @@ class Model_importer():
     
     #Print model MAE, parity plot and option to save img PNG
     def Model_performance(self,model,X_train,X_test,Y_train,Y_test ,save_img=False): 
-        #X/Y (array)
-        #save_img (bool)
+        '''
+        X/Y: array
+        save_img: bool
+        '''
         
         #Predicted Values
         yhat_train =list( model.predict(X_train)[:,0] )
@@ -109,13 +110,15 @@ class Model_importer():
     
 #This class handle optimization, exploration and generation of geometry files    
 class Strucutre_Generator():
-    def __init__(self,dictionnary,model):#descriptor_dict,position_count,dataframe):
+    def __init__(self,dictionnary,model):
         self.dictionnary = dictionnary
         self.model = model
     #Called within Random_datapoint function. Perform feature embedding from a list of str values of 
     #local configuration into a tensor
     def Convert_line(self, line):
-        #line (df series)
+        '''
+        line (df series)
+        '''
         label_holders=[]
         for i in range(52):
             label_holders.append(str(i))
@@ -128,7 +131,10 @@ class Strucutre_Generator():
         
     #Called within Generate_structures_2n. Generate random datapoint, convert to tensor    
     def Random_datapoint(self, ele):
-        #ele (str)
+        '''
+        ele: str
+        '''
+        
         template = ['Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu']
         replacements=[]
         for k in range(13):
@@ -143,9 +149,11 @@ class Strucutre_Generator():
     
     #Generate fixed amount of random structures and save the structures/predictions within a list   
     def Generate_structures_2n(self,pred_ele,count=100,save=False):
-        #pred_ele (str)
-        #count (float)
-        #save (bool)
+        '''
+        pred_ele: str
+        count: float
+        save: bool
+        '''
         
         t1=time.time()        
         predictions_str = []
@@ -182,20 +190,24 @@ class Strucutre_Generator():
         
         return predictions_str,predictions,struct_pred
     
-    #Get stats
     def Get_generation_stats(self,preds):
-        #preds (list)
+        '''
+        preds: list
+        '''
+        
         Mean = np.mean(preds)
         print(f'Mean: {str(Mean)[:5]}')
         Range = np.max(preds) - np.min(preds)
         print (f'Range: {str(Range)[:5]}')
         best_ads = np.max(preds)
         print ('Best Ads: '+str(best_ads)[:5])
-    #Extract best structure    
+    
     def Get_optimal_structure(self,preds,structs,elements):
-        #preds (list)
-        #structs (list)
-        #elements (list of str)
+        '''
+        preds: list)
+        structs: list
+        elements: list of str
+        '''
         
         for i in range(len(preds)):
             if preds[i] == np.min(preds):
@@ -207,14 +219,16 @@ class Strucutre_Generator():
                 replacement_idx.append(i+1)
                 
         return structs[idx],replacement_idx
-    #convert tensor into a geometry file for DFT calcs
+    
+    #Convert tensor into a geometry file for DFT calcs
     def New_design_2n(self,replacements,element,slab=None,save=False,formatting='espresso-in'):
-        #replacements (list)
-        #element (str)
-        #slab (ASE atoms object)
-        #save (bool)
-        #formatting (str of ASE formats)
-        
+        '''
+        replacements: list
+        element: str
+        slab: ASE atoms object
+        save: bool
+        formatting: str of ASE formats
+        '''
         if slab is None:
             sample_atom = read('Cu_Pure',format='vasp')
         if slab is not None:
@@ -341,6 +355,10 @@ class Strucutre_Generator():
         return sample_atom
         
     def Random_datapoint_3n(self, ele1,ele2):
+        '''
+        ele1/ele2: str
+        '''
+        
         template = ['Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu','Cu']
         replacements=[]
         for k in range(13):
@@ -366,9 +384,11 @@ class Strucutre_Generator():
 
     #Generate fixed amount of random structures and save the structures/predictions within a list       
     def Generate_structures_3n(self,e1,e2,count=100,save=False):
-        #e1/e2 (str)
-        #count (float)
-        #save (bool)
+        '''
+        e1/e2: str
+        count: float
+        save: bool
+        '''
         
         t1=time.time()
 
@@ -376,11 +396,6 @@ class Strucutre_Generator():
         predictions = []
         struct_pred = [] #list of lists
 
-
-        #for j in range(len(ele_combinations)):
-            #e1=ele_combinations[j][0]
-            #e2=ele_combinations[j][1]
-            #e1_e2= e1+'_'+e2
         print(f'Generating {e1}/{e2} TACs...')
         for i in range(count):
             template,datapoint = self.Random_datapoint_3n(e1,e2)
@@ -388,8 +403,6 @@ class Strucutre_Generator():
             predictions_str.append(str(self.model.predict(datapoint)[0][0]))
             predictions.append(self.model.predict(datapoint)[0][0])
             struct_pred.append(template)
-
-                #ele_combo.append(e1_e2)
         t2=time.time()
         print(f'3n Structure Gen. Runtime (s): {t2-t1}')
 
@@ -406,26 +419,29 @@ class Strucutre_Generator():
         self.predictions_structures_3n = struct_pred
         self.alloyed_element_3n = e1+e2
         return predictions_str,predictions,struct_pred        
-    # convert list of str of elements into replace idx for new_design function 
+    
+    #Convert list of str of elements into replace idx for new_design function 
     def Symbol_to_index(self,ele,structure): 
-        #ele (str)
-        #structure (list)
+        '''
+        ele: str
+        structure: list
+        '''
         
         idx=[]
         for i in range(len(structure)):
             if structure[i] == ele:
                 idx.append(i+1)
-            else:
-                p=0
         return idx        
 
-    #convert tensor into a geometry file for DFT calcs         
+    #Convert tensor into a geometry file for DFT calcs         
     def New_design_3n(self,e1,e2,structure,save=False,formatting='espresso-in'):
-        #replacements (list)
-        #element (str)
-        #slab (ASE atoms object)
-        #save (bool)
-        #formatting (str of ASE formats)
+        '''
+        replacements: list
+        element: str
+        slab: ASE atoms object
+        save: bool
+        formatting: str of ASE formats
+        '''
         
         rep1 = self.Symbol_to_index(e1,structure)
         rep2 = self.Symbol_to_index(e2,structure)
