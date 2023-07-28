@@ -7,14 +7,14 @@ Table of Contents
 =================
 
 <!--ts-->
-   * [Scientific Signifiance](#scientific-signifiance)
+   * [Scientific signifiance](#scientific-signifiance)
    * [Usage](#usage)
    * [Code Structure](#code-structure)
       * [File Contents](#file-contents)
       * [Dependencies](#dependencies)
 <!--te-->
 
-Scientific Signifiance
+Scientific-signifiance
 ======================
 
 In addition to the ML framework, this work provides the first ever investigation into the bidentate adsorption of COCOH, a key intermediate in the CO2RR pathway towards its most valuable products (C2+). As seen below, literature exclusively focused on the monodentate pathway but this work shows the energetics of bidentate dual CO co-adsorption followed by hydrogenation can provide a more energetically favorable pathway.
