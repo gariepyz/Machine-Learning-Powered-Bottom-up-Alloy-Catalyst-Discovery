@@ -81,3 +81,4 @@ Package dependencies
 - Seaborn
 - TensorFlow/Keras
 - Atomic Simulation Environment (ASE)
+- Sklearn
