@@ -10,7 +10,7 @@ Table of Contents
    * [Scientific signifiance](#scientific-signifiance)
    * [Usage](#usage)
    * [Code structure](#code-structure)
-      * [File Contents](#file-contents)
+      * [File contents](#file-contents)
       * [Dependencies](#dependencies)
 <!--te-->
 
@@ -33,10 +33,10 @@ The exact pipeline used to discover catalysts is visualized below. The notebook 
     <img width="50%" src="images/pipeline.png"> 
 </p>
 
-Code Structure
+Code structure
 ==============
 
-File Contents
+File contents
 -------------
 In this repo are the following files:
 
