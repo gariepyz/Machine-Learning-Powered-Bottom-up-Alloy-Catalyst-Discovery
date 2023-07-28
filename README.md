@@ -1,7 +1,7 @@
 Machine Learning Powered Bottom-up Alloy Catalyst Discovery
 ============================================================
 
-This repository provides the framework used to optimize and discover n+1 element catalysts from simpler n element catalyst. Code is scalable for larger element sizes as well. The full work is published under the title "Machine learning assisted binary alloy catalyst design for the electroreduction of CO2 to C2 products" (DOI: 10.1039/d2ya00316c).
+This repository provides the framework used to optimize and discover n+1 element catalysts from simpler n element catalyst. The code is scalable and can extrapolate to a wide range of oxide free catalysts. The full work is published in Energy Advances (RCS) - "Machine learning assisted binary alloy catalyst design for the electroreduction of CO2 to C2 products" (DOI: 10.1039/d2ya00316c).
 
 Table of Contents
 =================
@@ -17,7 +17,7 @@ Table of Contents
 Scientific-signifiance
 ======================
 
-In addition to the ML framework, this work provides the first ever investigation into the bidentate adsorption of COCOH, a key intermediate in the CO2RR pathway towards its most valuable products (C2+). As seen below, literature exclusively focused on the monodentate pathway but this work shows the energetics of bidentate dual CO co-adsorption followed by hydrogenation can provide a more energetically favorable pathway.
+In addition to the ML framework, this work performs the first ever investigation into the bidentate adsorption of COCOH*, a key intermediate in the CO2RR pathway towards its most valuable products (C~2+~). As seen below, literature exclusively focused on the monodentate pathway but this work shows the energetics of bidentate dual CO co-adsorption followed by hydrogenation can provide a more energetically favorable pathway.
 
 <p align="center" width="75%">
     <img width="50%" src="images/bidentate-nobg.png"> 
