@@ -7,9 +7,9 @@ Table of Contents
 =================
 
 <!--ts-->
-   * [Scientific signifiance](#scientific-signifiance)
+   * [Scientific signifiance](#Scientific-signifiance)
    * [Usage](#usage)
-   * [Code Structure](#code-structure)
+   * [Code structure](#code-structure)
       * [File Contents](#file-contents)
       * [Dependencies](#dependencies)
 <!--te-->
