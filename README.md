@@ -70,9 +70,11 @@ Cu_pure: sample structure for automated catalyst surface generation
 
 All code is thoroughly commented but if you have any questions, please feel free to reach out to me!
 
-Dependencies
-------------
-- numpy
-- pandas
-- matplotlib
-- seaborn
+Package dependencies
+--------------------
+- NumPy
+- Pandas
+- Matplotlib
+- Seaborn
+- TensorFlow/Keras
+- Atomic Simulation Environment (ASE)
