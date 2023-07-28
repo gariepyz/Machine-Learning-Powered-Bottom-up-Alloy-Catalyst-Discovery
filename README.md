@@ -7,14 +7,19 @@ Table of Contents
 =================
 
 <!--ts-->
-   * [Scientific signifiance](#scientific-signifiance)
+   * [Scientific content](#scientific-content)
+   * [Data science and ML content](#data-science-and-ML-content)
+      * [Binary alloy catalyst database](#binary-alloy-catalyst-database)
+      * [Feature space exploration](#feature-space-exploration)
+      * [NN modeling](#NN-modeling)
+      * [Active site optimization](#active-site-optimization)
    * [Usage](#usage)
    * [Code structure](#code-structure)
       * [File contents](#file-contents)
-      * [Dependencies](#dependencies)
+      * [Package dependencies](#package-dependencies)
 <!--te-->
 
-Scientific signifiance
+Scientific content
 ======================
 
 In addition to the ML framework, this work performs the first ever investigation into the bidentate adsorption of COCOH*, a key intermediate in the CO<sub>2</sub>RR pathway towards its most valuable products (C<sub>2+</sub>). As seen below, literature exclusively focused on the monodentate pathway but this work shows the pathway energetics of bidentate dual CO co-adsorption followed by hydrogenation can be more favorable.
@@ -23,7 +28,7 @@ In addition to the ML framework, this work performs the first ever investigation
     <img width="50%" src="images/bidentate-nobg.png"> 
 </p>
 
-Data Science and ML signifiance
+Data science and ML content
 ===============================
 Binary alloy catalyst database
 ------------------------------
@@ -33,11 +38,11 @@ Feature space exploration
 -------------------------
 The database extracted the nearest neighbors of the adsorbate and encoded individual atoms with chemical, quantum and spatial features. The exact encoding method can be found in one of my other repos (https://github.com/gariepyz/NN-Decomposition-For-Empirically-Derived-Insight/blob/main/helpers.py) under the 'feature_embedding' function. Due to the simplistic feature engineering performed, we were able to quantify the space exhaustiveness of each alloying composition. Additional notebook will be posted on our implementation of feature scores and intra/extrapolation degrees of prediction. 
 
-NN Modeling
+NN modeling
 -----------
 A standard TensorFlow multilayer perceptron neural network was used to train on the dataset. Although these models are older, they worked well with the basic feature engineering we performed. For more up to date models, please see my Graph Neural Network (GNN) modeling publication/repo (https://github.com/gariepyz/Automatic-Graph-Representation-Algorithm)
 
-Active Site Optimization
+Active site optimization
 ------------------------
 An automated framework to extract,visualize, analyze and conver into DFT readable files for ML predicted optimal structures was created from scratch. This optimization was also employed for the bottom-up design of increasingly complex catalyst by using simpler builder blocks. 
 
