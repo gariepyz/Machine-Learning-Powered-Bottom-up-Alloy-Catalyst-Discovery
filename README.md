@@ -25,20 +25,36 @@ In addition to the ML framework, this work performs the first ever investigation
 
 Data Science and ML signifiance
 ===============================
+Binary alloy catalyst database
+------------------------------
+A new database on Binary Alloy Catalysts accompanies the code. This database contains 1600 unique structures of Cu alloyed with Ag, Au, Pt, Pd, Rh, Ru, Ir, Os. The dataset was generated using high-throughput computations on Compute Canada resources. Each computation utilized Quantum Espresso or VASP compilations to automate the majority of DFT calculations. For exact simulation parameters, functionals, and structures, please refer to my paper (DOI	https://doi.org/10.1039/D2YA00316C). 
+
+Feature space exploration
+-------------------------
+The database extracted the nearest neighbors of the adsorbate and encoded individual atoms with chemical, quantum and spatial features. The exact encoding method can be found in one of my other repos (https://github.com/gariepyz/NN-Decomposition-For-Empirically-Derived-Insight/blob/main/helpers.py) under the 'feature_embedding' function. Due to the simplistic feature engineering performed, we were able to quantify the space exhaustiveness of each alloying composition. Additional notebook will be posted on our implementation of feature scores and intra/extrapolation degrees of prediction. 
+
+NN Modeling
+-----------
+A standard TensorFlow multilayer perceptron neural network was used to train on the dataset. Although these models are older, they worked well with the basic feature engineering we performed. For more up to date models, please see my Graph Neural Network (GNN) modeling publication/repo (https://github.com/gariepyz/Automatic-Graph-Representation-Algorithm)
+
+Active Site Optimization
+------------------------
+An automated framework to extract,visualize, analyze and conver into DFT readable files for ML predicted optimal structures was created from scratch. This optimization was also employed for the bottom-up design of increasingly complex catalyst by using simpler builder blocks. 
 
 Usage
 =====
-The main notebook titled 'Catalyst_Discovery_Framework' performs configurational space exploration, predicts optimal catalyst structures and automatically generates VASP readable geometry files based on the ML guided optimization.
+The main notebook titled 'Catalyst_Discovery_Framework' performs importing, prediction, visualization, configurational space exploration, optimization and generation. These steps are thoroughly commented and walked through in the notebook.
 
-The exact pipeline used to discover catalysts is visualized below. The notebook elaborates on the design decisions, science and discovery featured in the publication.
+The exact pipeline used to discover catalysts is visualized below. my publication elaborates on the design decisions, science and discovery featured in this framework.
 
 <p align="center" width="75%">
     <img width="50%" src="images/pipeline.png"> 
 </p>
 
+An additional notebook for subplotting and summarizing the dataset is also provided. This notebook simply shows how to replicate the publications data figures.
+
 Code structure
 ==============
-
 File contents
 -------------
 In this repo are the following files:
@@ -56,5 +72,7 @@ All code is thoroughly commented but if you have any questions, please feel free
 
 Dependencies
 ------------
-
-(Insert require packages here July 28, 2023)
+- numpy
+- pandas
+- matplotlib
+- seaborn
