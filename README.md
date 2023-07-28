@@ -17,11 +17,14 @@ Table of Contents
 Scientific-signifiance
 ======================
 
-In addition to the ML framework, this work performs the first ever investigation into the bidentate adsorption of COCOH*, a key intermediate in the CO2RR pathway towards its most valuable products (C<sub>2+</sub>). As seen below, literature exclusively focused on the monodentate pathway but this work shows the energetics of bidentate dual CO co-adsorption followed by hydrogenation can provide a more energetically favorable pathway.
+In addition to the ML framework, this work performs the first ever investigation into the bidentate adsorption of COCOH*, a key intermediate in the CO<sub>2</sub>RR pathway towards its most valuable products (C<sub>2+</sub>). As seen below, literature exclusively focused on the monodentate pathway but this work shows the pathway energetics of bidentate dual CO co-adsorption followed by hydrogenation can be more favorable.
 
 <p align="center" width="75%">
     <img width="50%" src="images/bidentate-nobg.png"> 
 </p>
+
+Data Science and ML signifiance
+===============================
 
 Usage
 =====
