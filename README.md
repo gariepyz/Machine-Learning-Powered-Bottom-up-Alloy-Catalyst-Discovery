@@ -20,7 +20,7 @@ Table of Contents
 <!--te-->
 
 Scientific content
-======================
+==================
 
 In addition to the ML framework, this work performs the first ever investigation into the bidentate adsorption of COCOH*, a key intermediate in the CO<sub>2</sub>RR pathway towards its most valuable products (C<sub>2+</sub>). As seen below, literature exclusively focused on the monodentate pathway but this work shows the pathway energetics of bidentate dual CO co-adsorption followed by hydrogenation can be more favorable.
 
@@ -29,7 +29,7 @@ In addition to the ML framework, this work performs the first ever investigation
 </p>
 
 Data science and ML content
-===============================
+===========================
 Binary alloy catalyst database
 ------------------------------
 A new database on Binary Alloy Catalysts accompanies the code. This database contains 1600 unique structures of Cu alloyed with Ag, Au, Pt, Pd, Rh, Ru, Ir, Os. The dataset was generated using high-throughput computations on Compute Canada resources. Each computation utilized Quantum Espresso or VASP compilations to automate the majority of DFT calculations. For exact simulation parameters, functionals, and structures, please refer to my paper (DOI	https://doi.org/10.1039/D2YA00316C). 
@@ -55,8 +55,6 @@ The exact pipeline used to discover catalysts is visualized below. my publicatio
 <p align="center" width="75%">
     <img width="50%" src="images/pipeline.png"> 
 </p>
-
-An additional notebook for subplotting and summarizing the dataset is also provided. This notebook simply shows how to replicate the publications data figures.
 
 Code structure
 ==============
