@@ -1,7 +1,7 @@
 Machine Learning Powered Bottom-up Alloy Catalyst Discovery
 ============================================================
 
-This repository provides the framework used to optimize and discover n+1 element catalysts from simpler n element catalyst. The code is scalable and can extrapolate to a wide range of oxide free catalysts. The full work is published in Energy Advances (RCS) - "Machine learning assisted binary alloy catalyst design for the electroreduction of CO2 to C2 products" (DOI: 10.1039/d2ya00316c).
+This repository provides the framework used to optimize and discover n+1 element catalysts from simpler n element catalyst. The code is scalable and can extrapolate to a wide range of oxide free catalysts. The full work is published in Energy Advances (RCS) - "Machine learning assisted binary alloy catalyst design for the electroreduction of CO<sub>2</sub> to C<sub>2</sub> products" (DOI: 10.1039/d2ya00316c).
 
 Table of Contents
 =================
